@@ -2,9 +2,9 @@ package com.inti;
 
 import java.io.Serializable;
 
-//import javax.persistence.Entity;
-//import javax.persistence.Id;
-//import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 //import javax.xml.bind.annotation.XmlAccessType;
 //import javax.xml.bind.annotation.XmlAccessorType;
 //import javax.xml.bind.annotation.XmlRootElement;
@@ -13,8 +13,8 @@ import java.io.Serializable;
 //import lombok.Data;
 //import lombok.NoArgsConstructor;
 
-//@Entity
-//@Table(name = "product_jaxb")
+@Entity
+@Table(name = "ProductCamel")
 //@XmlRootElement(name = "Product")
 //@XmlAccessorType(XmlAccessType.FIELD)
 //@Data
@@ -23,7 +23,7 @@ import java.io.Serializable;
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-//	@Id
+	@Id
 	private int productid;
 	private String name;
 	private int quantity;
