@@ -21,7 +21,7 @@ public void configure() throws Exception {
 			.process(new ProcessGetActiveMQ())
 			.to("seda:traitement");
 			
-			
+			// eip Content Based Router
 			from("direct:traitement") //ou direct:test et on met le producerTemplate da ns le main
 			.split().tokenize("\n")
 			.setBody(constant("select * from ClientCamel"))
@@ -30,7 +30,9 @@ public void configure() throws Exception {
 			 .to("jms:queue:my_queue_FD_Stylo")
 			.otherwise()
 			 .to("jms:queue:my_queue_FD_Cle");
-
+			
+			
+			// eip – Recipient List
 			from("direct:traitement")
 			.split().tokenize("\n")
 			.process(new Processor() {
@@ -44,26 +46,7 @@ public void configure() throws Exception {
 			.process(new ProcessorAMQRL())
 			.recipientList(header("queue"));
 
-		}
-	});
+	
 
-	
-	
-	
-	from("direct:select")
-	.setBody(constant("select * from ProductCamel"))
-	.to("jdbc:dataSource")
-	.process(new ProcessGetActiveMQ())
-	.to("seda:traitement");
-	
-	
-	from("direct:traitement") //ou direct:test et on met le producerTemplate da ns le main
-	.split().tokenize("\n")
-	.choice()
-	 .when(body().contains("Stylo"))
-	 .to("jms:queue:my_queue_FD_Stylo")
-	.otherwise()
-	 .to("jms:queue:my_queue_FD_Cle");	
-	
 }
 }
