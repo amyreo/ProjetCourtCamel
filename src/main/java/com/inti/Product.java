@@ -2,6 +2,10 @@ package com.inti;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 //import javax.persistence.Entity;
 //import javax.persistence.Id;
 //import javax.persistence.Table;
@@ -15,8 +19,8 @@ import java.io.Serializable;
 
 //@Entity
 //@Table(name = "product_jaxb")
-//@XmlRootElement(name = "Product")
-//@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Product")
+@XmlAccessorType(XmlAccessType.FIELD)
 //@Data
 //@NoArgsConstructor
 //@AllArgsConstructor
@@ -27,6 +31,11 @@ public class Product implements Serializable {
 	private int productid;
 	private String name;
 	private int quantity;
+	
+
+	public Product() {
+		super();
+	}
 
 	public int getProductid() {
 		return productid;
