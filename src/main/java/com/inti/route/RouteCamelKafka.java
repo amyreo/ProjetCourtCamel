@@ -25,7 +25,17 @@ public class RouteCamelKafka extends RouteBuilder {
 				.append(topicName).append("&").append(zooKeeperHost).append("&")
 				.append(serializerClass).toString();
 		
-		from("direct:start").to(toKafka);
+		String topicName2 = "topic=kafkaWireTap";
+		String kafkaServer2 = "kafka:localhost:9092";
+		String zooKeeperHost2 = "zookeeperHost=localhost&zookeeperPort=2181";
+		String serializerClass2 = "serializerClass=kafka.serializer.StringEncoder";
+		String toKafka2 = new StringBuilder().append(kafkaServer2).append("?")
+				.append(topicName2).append("&").append(zooKeeperHost2).append("&")
+				.append(serializerClass2).toString();
+		
+		from("direct:start")
+		.wireTap(toKafka2)
+		.to(toKafka);
 	}
 
 }
