@@ -20,10 +20,14 @@ public class MainProjetCamelKafka {
 
 		
 		Product p1 = new Product(1, "carotte", 90);
+		Product p2 = new Product(2, "potiron", 12);
+		Product p3 = new Product(5, "carot", 5);
 		context.start();
 		
 		ProducerTemplate producerTemplate = context.createProducerTemplate();
 		producerTemplate.sendBody("direct:start", p1.toString());
+		producerTemplate.sendBody("direct:start", p2.toString());
+		producerTemplate.sendBody("direct:start", p3.toString());
 
 	}
 

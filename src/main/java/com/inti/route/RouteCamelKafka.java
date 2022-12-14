@@ -35,6 +35,7 @@ public class RouteCamelKafka extends RouteBuilder {
 		
 		from("direct:start")
 		.wireTap(toKafka2)
+		.filter(body().contains(" carotte "))
 		.to(toKafka);
 	}
 
